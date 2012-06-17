@@ -1,5 +1,5 @@
 /*
-Tugas grafkom (revisi)
+Tugas besar Grafkom
 kelompok 5 : Yulius angga E.P (10108429)
              Imam ashadi (10108436)
              Ghea ratimanjari (10108449)
@@ -18,13 +18,13 @@ kelompok 5 : Yulius angga E.P (10108429)
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <math.h>
+#define PI 3.1415926535
 
 using namespace std;
 
 int w=900, h=600, z=0;
 int x2=0, y2=0, sudut=0, z2=0;
 int i,j;
-#define PI 3.1415926535
 float sudut1 = 0;
 int n;
 static float materialA[] = {0.8,1.0,0.97}; // coklat tua
@@ -217,8 +217,6 @@ void kursi(void)
         glutSolidCube(1.0);
      glPopMatrix();
 }
-
-
 
 void meja(void)
 {     
@@ -451,98 +449,6 @@ void lingkaran(int radius, int jumlah_titik, int x_tengah, int y_tengah)
      glEnd();
 }
 
-void panahJam(){
- glBegin(GL_POLYGON);
- glColor3f(0,0,0);
- glVertex2i(0,200);
- glVertex2i(10,180);
- glVertex2i(5,180);
- glVertex2i(5,0);
- glVertex2i(-5,0);
- glVertex2i(-5,180);
- glVertex2i(-10,180);
- glVertex2i(0,200);
- glEnd();
-}
-
-void panahMenit(){
- glBegin(GL_POLYGON);
- glColor3f(1,1,1);
- glVertex2i(0,220);
- glVertex2i(10,200);
- glVertex2i(5,200);
- glVertex2i(5,0);
- glVertex2i(-5,0);
- glVertex2i(-5,200);
- glVertex2i(-10,200);
- glVertex2i(0,220);
- glEnd();
-}
-void panahDetik(){
- glBegin(GL_POLYGON);
- glColor3f(1,0,0);
- glVertex2i(0,240);
- glVertex2i(10,210);
- glVertex2i(5,210);
- glVertex2i(5,0);
- glVertex2i(-5,0);
- glVertex2i(-5,210);
- glVertex2i(-10,210);
- glVertex2i(0,240);
- glEnd();
-}
-
-void angka(float jarak, float x, float y) {
- glPointSize(10);
-
- glBegin(GL_POINTS);
-  glColor3f(0,0,0);
-  for(n=0;n<360;n+=30)
-   glVertex2f(jarak*(float)sin(n*PI/180.0)+x,jarak*(float)cos(n*PI/180.0)+y);
- glEnd();
-}
-
-void menit(float jarak, float x, float y) {
- glPointSize(2);
-
- glBegin(GL_POINTS);
-  glColor3f(0,0,0);
-  for(n=0;n<360;n+=6)
-   glVertex2f(jarak*(float)sin(n*PI/180.0)+x,jarak*(float)cos(n*PI/180.0)+y);
- glEnd();
-}
-
-void jam()
-{
-    glPushMatrix();
- glColor3f(0.7,0.7,0.7);
- lingkaran(250,100,0,0);
-
- angka(230.,0.,0.);
- menit(230.,0.,0.);
- glPopMatrix();
-
- glPushMatrix();
- glRotatef(sudut1,0,0,1);
- panahDetik();
- glPopMatrix();
-
- glPushMatrix();
- glRotatef(sudut1/60,0,0,1);
- panahMenit();
- glPopMatrix();
-
- glPushMatrix();
- glRotatef(sudut1/720,0,0,1);
- panahJam();
- glPopMatrix();
- 
- glColor3f(0,0,0);
- lingkaran(20,100,0,0); 
-}
-
-
-
 void gambarRuang(void)
 {
      glClearColor(0,0,0,1);
@@ -690,7 +596,7 @@ int main (int argc, char **argv)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
     glutInitWindowPosition(100,100);
     glutInitWindowSize(w,h);
-    glutCreateWindow("Objek 3d");
+    glutCreateWindow("Objek Kamar");
     gluOrtho2D(-w/2,w/2,-h/2,h/2);
     glutDisplayFunc(displayObjek);
     glutReshapeFunc(resize);
