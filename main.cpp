@@ -168,7 +168,7 @@ void lukisan()
      glEnable ( GL_TEXTURE_2D );
      glBindTexture ( GL_TEXTURE_2D, loadTexture);
      loadTexture = LoadBitmap("seohyun.bmp");
-     glTranslatef(0.0, 0.0, 13.8);
+     glTranslatef(0.0, 0.0, 18);
      
      glScalef(5.0, 3.0, 0.4);
      glTranslatef(0.0, 0.5, 1.0);
@@ -188,7 +188,6 @@ void lukisan()
 //glutSolidCube(1.0);
 glDisable ( GL_TEXTURE_2D );
 glPopMatrix();
-
 }
 
 void kursi(void)
@@ -419,6 +418,31 @@ void kotak3(float x, float y, float z)
 	 glPopMatrix();
 }
 
+void pintu()
+{
+     glPushMatrix();
+     glTranslatef(4.5,-5.5,-17.0);
+     glScalef(6.0,5.0,2.5);
+     glTexCoord2f(0.0, 0.0);glutSolidCube(1.5);
+     glPopMatrix();
+     
+     glPushMatrix();
+     glEnable ( GL_TEXTURE_2D );
+     glBindTexture ( GL_TEXTURE_2D, loadTexture);
+     loadTexture = LoadBitmap("rak.bmp");
+     glBegin(GL_QUADS); 
+     //tembok depan
+     glColor3f(1.0,0.0,0.0);
+     glNormal3f(5.0f, 5.0f, 5.0f);               
+     glTexCoord2f(0.0, 0.0);glVertex3f(0.0f, -1.4f,-15.0f);           // atas kiri
+     glTexCoord2f(1.0, 0.0);glVertex3f(0.0f,-9.5f,-15.0f);           // bawah kiri
+     glTexCoord2f(1.0, 1.0);glVertex3f( 9.0f,-9.5f,-15.0f);           // bawah kanan
+     glTexCoord2f(0.0, 1.0);glVertex3f( 9.0f, -1.4f,-15.0f);           // atas kanan
+     glEnd();
+     glDisable ( GL_TEXTURE_2D );
+     glPopMatrix();            
+}
+
 void tempatTidur()
 {
      glPushMatrix();
@@ -434,19 +458,6 @@ void tempatTidur()
        glScalef(6.0,2.0,10.0);
        glutSolidCube(1.3);
     glPopMatrix();   
-}
-
-void lingkaran(int radius, int jumlah_titik, int x_tengah, int y_tengah) 
-{
-     glBegin(GL_POLYGON);
-     for (i=0;i<=360;i++)
-     {
-        float sudut=i*(2*PI/jumlah_titik);
-        float x=x_tengah+radius*cos(sudut);
-        float y=y_tengah+radius*sin(sudut);
-        glVertex2f(x,y);
-     }
-     glEnd();
 }
 
 void gambarRuang(void)
@@ -585,6 +596,7 @@ void displayObjek()
      kursi();
      meja();
      lukisan();
+     pintu();
      tempatTidur();
      gambarRuang();   
      glFlush();
